@@ -13,9 +13,15 @@ class YouTubePopularThisYear {
   }
 
   init() {
+    console.log('YouTube Popular This Year: Extension initialized');
+    console.log('YouTube Popular This Year: Current URL:', window.location.href);
+    
     // Wait for page to load and check if we're on a channel page
     if (this.isChannelPage()) {
+      console.log('YouTube Popular This Year: Channel page detected');
       this.waitForSortButtons();
+    } else {
+      console.log('YouTube Popular This Year: Not a channel page');
     }
   }
 
@@ -30,7 +36,8 @@ class YouTubePopularThisYear {
   waitForSortButtons() {
     // Wait for the sort buttons to appear
     const observer = new MutationObserver((mutations) => {
-      const sortContainer = document.querySelector('#sort-menu-button, yt-chip-cloud-modern');
+      // Look for various possible sort button containers
+      const sortContainer = document.querySelector('#sort-menu-button, yt-chip-cloud-modern, yt-chip-cloud, #chips-container, [role="tablist"]');
       if (sortContainer) {
         observer.disconnect();
         this.addPopularThisYearButton();
@@ -43,19 +50,35 @@ class YouTubePopularThisYear {
     });
 
     // Also try to find it immediately in case it's already loaded
-    const sortContainer = document.querySelector('#sort-menu-button, yt-chip-cloud-modern');
+    const sortContainer = document.querySelector('#sort-menu-button, yt-chip-cloud-modern, yt-chip-cloud, #chips-container, [role="tablist"]');
     if (sortContainer) {
       this.addPopularThisYearButton();
     }
+
+    // Fallback: try to find after a short delay
+    setTimeout(() => {
+      const sortContainer = document.querySelector('#sort-menu-button, yt-chip-cloud-modern, yt-chip-cloud, #chips-container, [role="tablist"]');
+      if (sortContainer) {
+        this.addPopularThisYearButton();
+      }
+    }, 2000);
   }
 
   addPopularThisYearButton() {
     // Look for existing sort buttons container
-    const sortContainer = document.querySelector('#sort-menu-button, yt-chip-cloud-modern');
-    if (!sortContainer) return;
+    const sortContainer = document.querySelector('#sort-menu-button, yt-chip-cloud-modern, yt-chip-cloud, #chips-container, [role="tablist"]');
+    if (!sortContainer) {
+      console.log('YouTube Popular This Year: Sort container not found');
+      return;
+    }
 
     // Check if button already exists
-    if (document.querySelector('.popular-this-year-btn')) return;
+    if (document.querySelector('.popular-this-year-btn')) {
+      console.log('YouTube Popular This Year: Button already exists');
+      return;
+    }
+
+    console.log('YouTube Popular This Year: Adding button to container:', sortContainer);
 
     // Create the button
     const button = document.createElement('button');
@@ -68,9 +91,11 @@ class YouTubePopularThisYear {
     if (parentContainer) {
       // Insert after the sort container
       parentContainer.insertBefore(button, sortContainer.nextSibling);
+      console.log('YouTube Popular This Year: Button added after sort container');
     } else {
       // Fallback: append to sort container
       sortContainer.appendChild(button);
+      console.log('YouTube Popular This Year: Button added to sort container');
     }
   }
 
