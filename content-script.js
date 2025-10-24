@@ -36,8 +36,8 @@ class YouTubePopularThisYear {
   waitForSortButtons() {
     // Wait for the sort buttons to appear
     const observer = new MutationObserver((mutations) => {
-      // Look for various possible sort button containers
-      const sortContainer = document.querySelector('#sort-menu-button, yt-chip-cloud-modern, yt-chip-cloud, #chips-container, [role="tablist"]');
+      // Look specifically for video filter chips container
+      const sortContainer = document.querySelector('ytd-feed-filter-chip-bar-renderer #chips, yt-chip-cloud-modern, yt-chip-cloud, #chips-container');
       if (sortContainer) {
         observer.disconnect();
         this.addPopularThisYearButton();
@@ -50,14 +50,14 @@ class YouTubePopularThisYear {
     });
 
     // Also try to find it immediately in case it's already loaded
-    const sortContainer = document.querySelector('#sort-menu-button, yt-chip-cloud-modern, yt-chip-cloud, #chips-container, [role="tablist"]');
+    const sortContainer = document.querySelector('ytd-feed-filter-chip-bar-renderer #chips, yt-chip-cloud-modern, yt-chip-cloud, #chips-container');
     if (sortContainer) {
       this.addPopularThisYearButton();
     }
 
     // Fallback: try to find after a short delay
     setTimeout(() => {
-      const sortContainer = document.querySelector('#sort-menu-button, yt-chip-cloud-modern, yt-chip-cloud, #chips-container, [role="tablist"]');
+      const sortContainer = document.querySelector('ytd-feed-filter-chip-bar-renderer #chips, yt-chip-cloud-modern, yt-chip-cloud, #chips-container');
       if (sortContainer) {
         this.addPopularThisYearButton();
       }
@@ -65,20 +65,20 @@ class YouTubePopularThisYear {
   }
 
   addPopularThisYearButton() {
-    // Look for existing sort buttons container
-    const sortContainer = document.querySelector('#sort-menu-button, yt-chip-cloud-modern, yt-chip-cloud, #chips-container, [role="tablist"]');
+    // Look for video filter chips container specifically
+    const sortContainer = document.querySelector('ytd-feed-filter-chip-bar-renderer #chips, yt-chip-cloud-modern, yt-chip-cloud, #chips-container');
     if (!sortContainer) {
-      console.log('YouTube Popular This Year: Sort container not found');
+      console.log('YouTube Popular This Year: Video filter chips container not found');
       return;
     }
 
     // Check if button already exists
-    if (document.querySelector('.popular-this-year-btn')) {
-      console.log('YouTube Popular This Year: Button already exists');
+    if (sortContainer.querySelector('.popular-this-year-btn')) {
+      console.log('YouTube Popular This Year: Button already exists in chips container');
       return;
     }
 
-    console.log('YouTube Popular This Year: Adding button to container:', sortContainer);
+    console.log('YouTube Popular This Year: Adding button to chips container:', sortContainer);
 
     // Create the button
     const button = document.createElement('button');
@@ -86,17 +86,9 @@ class YouTubePopularThisYear {
     button.textContent = 'Popular This Year';
     button.addEventListener('click', () => this.handlePopularThisYearClick());
 
-    // Try to insert the button in the appropriate location
-    const parentContainer = sortContainer.parentElement;
-    if (parentContainer) {
-      // Insert after the sort container
-      parentContainer.insertBefore(button, sortContainer.nextSibling);
-      console.log('YouTube Popular This Year: Button added after sort container');
-    } else {
-      // Fallback: append to sort container
-      sortContainer.appendChild(button);
-      console.log('YouTube Popular This Year: Button added to sort container');
-    }
+    // Insert the button at the beginning of the chips container
+    sortContainer.insertBefore(button, sortContainer.firstChild);
+    console.log('YouTube Popular This Year: Button added to chips container');
   }
 
   handlePopularThisYearClick() {
