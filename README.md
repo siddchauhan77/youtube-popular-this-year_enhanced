@@ -1,54 +1,110 @@
-# YouTube Popular This Year Chrome Extension
+# YouTube Popular This Year Extension
 
-A Chrome extension that adds a "Popular This Year" filter button to YouTube channel pages, showing the most viewed videos from the past 12 months.
+A Chrome extension that adds a "Popular This Year" filter to YouTube channel pages, showing the most viewed videos from the past 12 months.
 
-## Features
+## ✨ Features
 
-- Adds a "Popular This Year" button to YouTube channel pages
-- Filters videos from the past 12 months
-- Sorts videos by total view count (highest first)
-- Seamlessly integrates with YouTube's existing UI
-- Works on all YouTube channel page types
+- 🎯 **Smart Filtering**: Shows videos from the past 12 months only
+- 📊 **View-Based Sorting**: Sorts by total view count (highest first)
+- 🎨 **Native Styling**: Matches YouTube's exact button design
+- 🔄 **Persistent Button**: Stays visible when switching between tabs
+- 🌙 **Dark Mode Support**: Works in both light and dark themes
+- ⚡ **Fast Performance**: Efficient video parsing and filtering
 
-## Installation
+## 📦 Installation
 
-1. Download or clone this repository
-2. Open Chrome and go to `chrome://extensions/`
-3. Enable "Developer mode" in the top right
-4. Click "Load unpacked" and select the extension folder
-5. The extension will now be active on YouTube
+### Method 1: Load Unpacked (Recommended for testing)
 
-## Usage
+1. **Download the Extension**
+   - Click the green "Code" button on GitHub
+   - Select "Download ZIP"
+   - Extract the ZIP file to a folder
 
-1. Navigate to any YouTube channel page
-2. Look for the "Popular This Year" button (appears near the sort options)
-3. Click the button to filter videos from the past 12 months by view count
-4. Click "Show All Videos" to return to the original view
+2. **Install in Chrome**
+   - Open Chrome and go to `chrome://extensions/`
+   - Enable "Developer mode" (toggle in top right)
+   - Click "Load unpacked"
+   - Select the extracted folder
+   - The extension will appear in your extensions list
 
-## How It Works
+### Method 2: Chrome Web Store (Coming Soon)
 
-- The extension injects a button into YouTube's channel page interface
-- When clicked, it extracts video data (views, dates) from the current page
-- Filters videos uploaded within the past 12 months
-- Sorts by total view count in descending order
-- Updates the video display to show the filtered results
+We're working on getting this published to the Chrome Web Store for easier installation.
 
-## Technical Details
+## 🚀 Usage
 
-- Uses Chrome Extension Manifest V3
-- Content script injection on YouTube pages
-- DOM manipulation to extract and reorder video elements
-- Handles YouTube's dynamic loading and navigation
+1. **Navigate to a YouTube Channel**
+   - Go to any YouTube channel page (e.g., `youtube.com/@channelname/videos`)
+   - Make sure you're on the "Videos" tab
 
-## Browser Support
+2. **Find the Button**
+   - Look for "Popular This Year" in the filter row
+   - It appears after "Latest", "Popular", and "Oldest" buttons
 
-- Chrome (Manifest V3)
-- Other Chromium-based browsers (Edge, Brave, etc.)
+3. **Use the Filter**
+   - Click "Popular This Year" to see videos from the past 12 months
+   - Videos are sorted by view count (most popular first)
+   - Click again to return to the original view
 
-## Privacy
+## 🛠️ Development
 
-This extension:
-- Only runs on YouTube pages
-- Does not collect or transmit any data
-- Works entirely locally in your browser
-- No external API calls or data sharing
+### Tech Stack
+- **Manifest V3**: Latest Chrome extension standard
+- **Content Scripts**: DOM manipulation and video parsing
+- **CSS**: Pixel-perfect YouTube styling
+- **JavaScript**: Video filtering and sorting algorithms
+
+### Key Files
+- `manifest.json` - Extension configuration and permissions
+- `content-script.js` - Main functionality and video processing
+- `styles.css` - Button styling to match YouTube's design
+- `icons/` - Extension icons (16px, 48px, 128px)
+
+### Features Implemented
+- ✅ YouTube channel page detection
+- ✅ Dynamic button injection
+- ✅ Video metadata parsing (views, dates)
+- ✅ 12-month date filtering
+- ✅ View count sorting
+- ✅ MutationObserver for persistence
+- ✅ Active/inactive button states
+- ✅ Dark/light mode support
+
+## 🐛 Troubleshooting
+
+### Button Not Appearing
+- Make sure you're on a YouTube channel's "Videos" tab
+- Refresh the page
+- Check the browser console for error messages
+
+### Videos Not Filtering
+- Ensure the channel has videos from the past 12 months
+- Check that video metadata is loading properly
+- Try refreshing the page
+
+### Button Disappears
+- This should be fixed in v1.0.0 with the MutationObserver
+- If it still happens, refresh the page
+
+## 📝 Version History
+
+### v1.0.0 (Current)
+- Initial release
+- Core filtering functionality
+- YouTube-native button styling
+- Persistence across tab changes
+- Dark/light mode support
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit issues and pull requests.
+
+## 📄 License
+
+This project is open source and available under the MIT License.
+
+## 🔗 Links
+
+- **GitHub Repository**: [youtube-popular-this-year](https://github.com/beckyisj/youtube-popular-this-year)
+- **Issues**: Report bugs or request features
+- **Discussions**: Share ideas and feedback

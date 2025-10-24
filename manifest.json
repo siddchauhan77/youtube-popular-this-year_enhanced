@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "YouTube Popular This Year",
-  "version": "1.0",
+  "version": "1.0.0",
   "description": "Adds a 'Popular This Year' filter to YouTube channel pages to show the most viewed videos from the past 12 months.",
   "permissions": [
     "activeTab"
