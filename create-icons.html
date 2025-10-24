@@ -108,6 +108,22 @@
             ctx.closePath();
             ctx.fill();
             
+            // Heart symbol for "popular/likes"
+            if (size >= 32) {
+                const heartSize = size * 0.12;
+                const heartX = centerX + size * 0.15;
+                const heartY = centerY - size * 0.15;
+                
+                ctx.fillStyle = '#fff';
+                ctx.beginPath();
+                // Heart shape
+                ctx.moveTo(heartX, heartY + heartSize * 0.3);
+                ctx.bezierCurveTo(heartX - heartSize * 0.5, heartY - heartSize * 0.2, heartX - heartSize, heartY + heartSize * 0.1, heartX, heartY + heartSize * 0.5);
+                ctx.bezierCurveTo(heartX + heartSize, heartY + heartSize * 0.1, heartX + heartSize * 0.5, heartY - heartSize * 0.2, heartX, heartY + heartSize * 0.3);
+                ctx.closePath();
+                ctx.fill();
+            }
+            
             // Calendar icon (smaller for smaller sizes)
             if (size >= 48) {
                 const calSize = size * 0.15;
