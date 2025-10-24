@@ -1,8 +1,8 @@
-/* Popular This Year Button Styles */
+/* Popular This Year Button Styles - Match YouTube's exact styling */
 .popular-this-year-btn {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.1);
   border: none;
-  color: #0f0f0f;
+  color: #f1f1f1;
   cursor: pointer;
   font-family: "Roboto", "Arial", sans-serif;
   font-size: 14px;
@@ -12,16 +12,22 @@
   text-align: center;
   white-space: nowrap;
   border-radius: 18px;
-  transition: background-color 0.1s;
+  transition: background-color 0.1s ease;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .popular-this-year-btn:hover {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .popular-this-year-btn.active {
-  background-color: #0f0f0f;
-  color: #fff;
+  background-color: #f1f1f1;
+  color: #0f0f0f;
 }
 
 .popular-this-year-btn:focus {
@@ -29,18 +35,19 @@
   outline-offset: 2px;
 }
 
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
+/* Light mode support */
+@media (prefers-color-scheme: light) {
   .popular-this-year-btn {
-    color: #f1f1f1;
+    background: rgba(0, 0, 0, 0.05);
+    color: #0f0f0f;
   }
   
   .popular-this-year-btn:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(0, 0, 0, 0.1);
   }
   
   .popular-this-year-btn.active {
-    background-color: #f1f1f1;
-    color: #0f0f0f;
+    background-color: #0f0f0f;
+    color: #fff;
   }
 }

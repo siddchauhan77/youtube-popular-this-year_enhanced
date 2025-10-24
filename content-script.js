@@ -92,10 +92,18 @@ class YouTubePopularThisYear {
   }
 
   handlePopularThisYearClick() {
+    console.log('YouTube Popular This Year: Button clicked');
+    
     if (this.isActive) {
       this.resetToOriginal();
     } else {
       this.applyPopularThisYearFilter();
+    }
+    
+    // Update button active state
+    const button = document.querySelector('.popular-this-year-btn');
+    if (button) {
+      button.classList.toggle('active', this.isActive);
     }
   }
 
