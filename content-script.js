@@ -168,18 +168,22 @@ class YouTubePopularThisYear {
       const title = titleElement.textContent.trim();
       const videoUrl = titleElement.href;
 
-      // Extract view count - try multiple selectors
-      const viewCountElement = element.querySelector('#metadata-line span:first-child, #metadata-line yt-formatted-string, ytd-video-meta-block span, .ytd-video-meta-block span');
+      // Extract view count and date from all text content
+      const allText = element.textContent;
+      console.log('YouTube Popular This Year: All text content:', allText);
+      
+      // Try to find view count in the text
+      const viewCountMatch = allText.match(/(\d+(?:\.\d+)?[kmb]?)\s*views?/i);
       let viewCount = 0;
-      if (viewCountElement) {
-        viewCount = this.parseViewCount(viewCountElement.textContent);
+      if (viewCountMatch) {
+        viewCount = this.parseViewCount(viewCountMatch[1] + ' views');
       }
 
-      // Extract upload date - try multiple selectors
-      const dateElement = element.querySelector('#metadata-line span:last-child, #metadata-line yt-formatted-string:last-child, ytd-video-meta-block span:last-child, .ytd-video-meta-block span:last-child');
+      // Try to find date in the text
+      const dateMatch = allText.match(/(\d+\s*(?:hour|day|week|month|year)s?\s*ago)/i);
       let uploadDate = null;
-      if (dateElement) {
-        uploadDate = this.parseUploadDate(dateElement.textContent);
+      if (dateMatch) {
+        uploadDate = this.parseUploadDate(dateMatch[1]);
       }
 
       console.log('YouTube Popular This Year: Parsed video element:', {
@@ -206,42 +210,68 @@ class YouTubePopularThisYear {
   parseViewCount(viewCountText) {
     if (!viewCountText) return 0;
     
-    const text = viewCountText.toLowerCase().replace(/[^\d\w]/g, '');
+    console.log('YouTube Popular This Year: Parsing view count:', viewCountText);
+    
+    // Remove common words and clean the text
+    let text = viewCountText.toLowerCase()
+      .replace(/views?/g, '')
+      .replace(/view/g, '')
+      .replace(/,/g, '')
+      .trim();
+    
+    console.log('YouTube Popular This Year: Cleaned view count text:', text);
     
     if (text.includes('k')) {
-      return parseFloat(text.replace('k', '')) * 1000;
+      const num = parseFloat(text.replace('k', ''));
+      return Math.floor(num * 1000);
     } else if (text.includes('m')) {
-      return parseFloat(text.replace('m', '')) * 1000000;
+      const num = parseFloat(text.replace('m', ''));
+      return Math.floor(num * 1000000);
     } else if (text.includes('b')) {
-      return parseFloat(text.replace('b', '')) * 1000000000;
+      const num = parseFloat(text.replace('b', ''));
+      return Math.floor(num * 1000000000);
     } else {
-      return parseInt(text) || 0;
+      const num = parseFloat(text);
+      return isNaN(num) ? 0 : Math.floor(num);
     }
   }
 
   parseUploadDate(dateText) {
     if (!dateText) return null;
     
+    console.log('YouTube Popular This Year: Parsing upload date:', dateText);
+    
     const text = dateText.toLowerCase();
     const now = new Date();
     
     if (text.includes('hour')) {
       const hours = parseInt(text.match(/\d+/)?.[0] || '0');
-      return new Date(now.getTime() - hours * 60 * 60 * 1000);
+      const date = new Date(now.getTime() - hours * 60 * 60 * 1000);
+      console.log('YouTube Popular This Year: Parsed as', hours, 'hours ago:', date);
+      return date;
     } else if (text.includes('day')) {
       const days = parseInt(text.match(/\d+/)?.[0] || '0');
-      return new Date(now.getTime() - days * 24 * 60 * 60 * 1000);
+      const date = new Date(now.getTime() - days * 24 * 60 * 60 * 1000);
+      console.log('YouTube Popular This Year: Parsed as', days, 'days ago:', date);
+      return date;
     } else if (text.includes('week')) {
       const weeks = parseInt(text.match(/\d+/)?.[0] || '0');
-      return new Date(now.getTime() - weeks * 7 * 24 * 60 * 60 * 1000);
+      const date = new Date(now.getTime() - weeks * 7 * 24 * 60 * 60 * 1000);
+      console.log('YouTube Popular This Year: Parsed as', weeks, 'weeks ago:', date);
+      return date;
     } else if (text.includes('month')) {
       const months = parseInt(text.match(/\d+/)?.[0] || '0');
-      return new Date(now.getTime() - months * 30 * 24 * 60 * 60 * 1000);
+      const date = new Date(now.getTime() - months * 30 * 24 * 60 * 60 * 1000);
+      console.log('YouTube Popular This Year: Parsed as', months, 'months ago:', date);
+      return date;
     } else if (text.includes('year')) {
       const years = parseInt(text.match(/\d+/)?.[0] || '0');
-      return new Date(now.getTime() - years * 365 * 24 * 60 * 60 * 1000);
+      const date = new Date(now.getTime() - years * 365 * 24 * 60 * 60 * 1000);
+      console.log('YouTube Popular This Year: Parsed as', years, 'years ago:', date);
+      return date;
     }
     
+    console.log('YouTube Popular This Year: Could not parse date:', dateText);
     return null;
   }
 
