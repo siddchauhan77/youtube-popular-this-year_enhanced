@@ -13,21 +13,20 @@ A Chrome extension that adds a "Popular This Year" filter to YouTube channel pag
 
 ## 📦 Installation
 
-### Method 1: Load Unpacked (Recommended for testing)
+### Quick Install (3 Steps)
 
-1. **Download the Extension**
-   - Click the green "Code" button on GitHub
-   - Select "Download ZIP"
-   - Extract the ZIP file to a folder
+1️⃣ **Download**: Go to https://github.com/beckyisj/youtube-popular-this-year  
+Click "Code" → "Download ZIP"
 
-2. **Install in Chrome**
-   - Open Chrome and go to `chrome://extensions/`
-   - Enable "Developer mode" (toggle in top right)
-   - Click "Load unpacked"
-   - Select the extracted folder
-   - The extension will appear in your extensions list
+2️⃣ **Extract**: Unzip the downloaded file to a folder
 
-### Method 2: Chrome Web Store (Coming Soon)
+3️⃣ **Install**: 
+- Open Chrome → Go to `chrome://extensions/`
+- Enable "Developer mode" (toggle in top right)
+- Click "Load unpacked" → Select the extracted folder
+- Done! 🎉
+
+### Chrome Web Store (Coming Soon)
 
 We're working on getting this published to the Chrome Web Store for easier installation.
 
