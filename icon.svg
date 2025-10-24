@@ -6,7 +6,14 @@
   <polygon points="45,35 45,93 85,64" fill="#fff"/>
   
   <!-- Heart symbol for "popular/likes" -->
-  <path d="M95,50 C90,45 80,45 80,55 C80,45 70,45 65,50 C60,55 60,65 65,70 L80,85 L95,70 C100,65 100,55 95,50 Z" fill="#fff"/>
+  <g fill="#fff">
+    <!-- Left circle of heart -->
+    <circle cx="85" cy="50" r="8"/>
+    <!-- Right circle of heart -->
+    <circle cx="95" cy="50" r="8"/>
+    <!-- Triangle bottom of heart -->
+    <polygon points="90,70 75,55 105,55"/>
+  </g>
   
   <!-- Calendar icon for "This Year" -->
   <rect x="20" y="20" width="25" height="20" rx="2" fill="#fff"/>
