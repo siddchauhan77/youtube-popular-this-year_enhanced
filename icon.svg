@@ -1,29 +1,22 @@
 <svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
-  <!-- Background circle -->
-  <circle cx="64" cy="64" r="60" fill="#ff0000" stroke="#fff" stroke-width="4"/>
+  <!-- Red rounded rectangle background with gradient -->
+  <defs>
+    <linearGradient id="redGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff4444;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#cc0000;stop-opacity:1" />
+    </linearGradient>
+  </defs>
   
-  <!-- Play button triangle -->
-  <polygon points="45,35 45,93 85,64" fill="#fff"/>
+  <!-- Rounded rectangle background -->
+  <rect x="12" y="32" width="104" height="64" rx="12" ry="12" fill="url(#redGradient)"/>
   
-  <!-- Heart symbol for "popular/likes" -->
+  <!-- White heart symbol in center -->
   <g fill="#fff">
     <!-- Left circle of heart -->
-    <circle cx="85" cy="50" r="8"/>
+    <circle cx="52" cy="60" r="12"/>
     <!-- Right circle of heart -->
-    <circle cx="95" cy="50" r="8"/>
+    <circle cx="76" cy="60" r="12"/>
     <!-- Triangle bottom of heart -->
-    <polygon points="90,70 75,55 105,55"/>
+    <polygon points="64,88 40,68 88,68"/>
   </g>
-  
-  <!-- Calendar icon for "This Year" -->
-  <rect x="20" y="20" width="25" height="20" rx="2" fill="#fff"/>
-  <rect x="22" y="22" width="21" height="16" fill="#ff0000"/>
-  <line x1="25" y1="26" x2="25" y2="38" stroke="#fff" stroke-width="1"/>
-  <line x1="30" y1="26" x2="30" y2="38" stroke="#fff" stroke-width="1"/>
-  <line x1="35" y1="26" x2="35" y2="38" stroke="#fff" stroke-width="1"/>
-  <line x1="40" y1="26" x2="40" y2="38" stroke="#fff" stroke-width="1"/>
-  
-  <!-- Trending up arrow -->
-  <path d="M90 80 L100 70 L110 80" stroke="#fff" stroke-width="3" fill="none"/>
-  <path d="M95 75 L95 90" stroke="#fff" stroke-width="3"/>
 </svg>

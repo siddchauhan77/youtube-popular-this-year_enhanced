@@ -82,100 +82,57 @@
             const ctx = canvas.getContext('2d');
             const centerX = size / 2;
             const centerY = size / 2;
-            const radius = size * 0.4;
             
             // Clear canvas
             ctx.clearRect(0, 0, size, size);
             
-            // Background circle
-            ctx.fillStyle = '#ff0000';
+            // Red rounded rectangle background (YouTube-style)
+            const rectWidth = size * 0.8;
+            const rectHeight = size * 0.6;
+            const cornerRadius = size * 0.1;
+            const rectX = centerX - rectWidth / 2;
+            const rectY = centerY - rectHeight / 2;
+            
+            // Create gradient for depth
+            const gradient = ctx.createLinearGradient(rectX, rectY, rectX, rectY + rectHeight);
+            gradient.addColorStop(0, '#ff4444'); // Lighter red at top
+            gradient.addColorStop(1, '#cc0000');  // Darker red at bottom
+            
+            ctx.fillStyle = gradient;
             ctx.beginPath();
-            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+            ctx.roundRect(rectX, rectY, rectWidth, rectHeight, cornerRadius);
             ctx.fill();
             
-            // White border
-            ctx.strokeStyle = '#fff';
-            ctx.lineWidth = size * 0.03;
-            ctx.stroke();
+            // White heart symbol in center
+            const heartSize = size * 0.25;
+            const heartX = centerX;
+            const heartY = centerY;
             
-            // Play button triangle
             ctx.fillStyle = '#fff';
             ctx.beginPath();
-            const triangleSize = size * 0.25;
-            ctx.moveTo(centerX - triangleSize * 0.6, centerY - triangleSize);
-            ctx.lineTo(centerX - triangleSize * 0.6, centerY + triangleSize);
-            ctx.lineTo(centerX + triangleSize * 0.6, centerY);
-            ctx.closePath();
+            
+            // Heart shape using two circles and a triangle
+            const leftCircleX = heartX - heartSize * 0.3;
+            const rightCircleX = heartX + heartSize * 0.3;
+            const circleY = heartY - heartSize * 0.1;
+            const circleRadius = heartSize * 0.3;
+            
+            // Left circle
+            ctx.arc(leftCircleX, circleY, circleRadius, 0, 2 * Math.PI);
             ctx.fill();
             
-            // Heart symbol for "popular/likes"
-            if (size >= 24) {
-                const heartSize = size * 0.18;
-                const heartX = centerX + size * 0.25;
-                const heartY = centerY - size * 0.1;
-                
-                ctx.fillStyle = '#fff';
-                ctx.beginPath();
-                // Simplified heart shape - two circles and a triangle
-                const leftCircleX = heartX - heartSize * 0.3;
-                const rightCircleX = heartX + heartSize * 0.3;
-                const circleY = heartY + heartSize * 0.1;
-                const circleRadius = heartSize * 0.25;
-                
-                // Left circle
-                ctx.arc(leftCircleX, circleY, circleRadius, 0, 2 * Math.PI);
-                ctx.fill();
-                
-                // Right circle
-                ctx.beginPath();
-                ctx.arc(rightCircleX, circleY, circleRadius, 0, 2 * Math.PI);
-                ctx.fill();
-                
-                // Triangle bottom
-                ctx.beginPath();
-                ctx.moveTo(heartX, heartY + heartSize * 0.6);
-                ctx.lineTo(heartX - heartSize * 0.4, heartY + heartSize * 0.2);
-                ctx.lineTo(heartX + heartSize * 0.4, heartY + heartSize * 0.2);
-                ctx.closePath();
-                ctx.fill();
-            }
+            // Right circle
+            ctx.beginPath();
+            ctx.arc(rightCircleX, circleY, circleRadius, 0, 2 * Math.PI);
+            ctx.fill();
             
-            // Calendar icon (smaller for smaller sizes)
-            if (size >= 48) {
-                const calSize = size * 0.15;
-                const calX = centerX - size * 0.3;
-                const calY = centerY - size * 0.3;
-                
-                // Calendar base
-                ctx.fillStyle = '#fff';
-                ctx.fillRect(calX, calY, calSize, calSize * 0.8);
-                
-                // Calendar lines
-                ctx.strokeStyle = '#ff0000';
-                ctx.lineWidth = size * 0.01;
-                for (let i = 0; i < 4; i++) {
-                    const x = calX + (i + 1) * calSize / 5;
-                    ctx.beginPath();
-                    ctx.moveTo(x, calY + calSize * 0.2);
-                    ctx.lineTo(x, calY + calSize * 0.7);
-                    ctx.stroke();
-                }
-            }
-            
-            // Trending arrow (for larger sizes)
-            if (size >= 48) {
-                const arrowSize = size * 0.1;
-                const arrowX = centerX + size * 0.25;
-                const arrowY = centerY + size * 0.25;
-                
-                ctx.strokeStyle = '#fff';
-                ctx.lineWidth = size * 0.02;
-                ctx.beginPath();
-                ctx.moveTo(arrowX, arrowY + arrowSize);
-                ctx.lineTo(arrowX + arrowSize, arrowY);
-                ctx.lineTo(arrowX + arrowSize * 1.5, arrowY + arrowSize * 0.5);
-                ctx.stroke();
-            }
+            // Triangle bottom of heart
+            ctx.beginPath();
+            ctx.moveTo(heartX, heartY + heartSize * 0.4);
+            ctx.lineTo(heartX - heartSize * 0.5, heartY + heartSize * 0.1);
+            ctx.lineTo(heartX + heartSize * 0.5, heartY + heartSize * 0.1);
+            ctx.closePath();
+            ctx.fill();
         }
         
         function downloadIcon(canvasId, size) {
