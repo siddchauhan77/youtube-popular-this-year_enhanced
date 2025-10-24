@@ -86,8 +86,8 @@ class YouTubePopularThisYear {
     button.textContent = 'Popular This Year';
     button.addEventListener('click', () => this.handlePopularThisYearClick());
 
-    // Insert the button at the beginning of the chips container
-    sortContainer.insertBefore(button, sortContainer.firstChild);
+    // Insert the button at the end of the chips container (last position)
+    sortContainer.appendChild(button);
     console.log('YouTube Popular This Year: Button added to chips container');
   }
 
@@ -140,12 +140,16 @@ class YouTubePopularThisYear {
 
   extractVideoData() {
     const videos = [];
-    const videoElements = document.querySelectorAll('#contents ytd-rich-item-renderer, #contents ytd-video-renderer');
+    // Look for video elements in the main content area
+    const videoElements = document.querySelectorAll('#contents ytd-rich-item-renderer, #contents ytd-video-renderer, ytd-rich-item-renderer, ytd-video-renderer');
+    
+    console.log('YouTube Popular This Year: Found', videoElements.length, 'video elements');
     
     videoElements.forEach((element, index) => {
       const videoData = this.parseVideoElement(element, index);
       if (videoData) {
         videos.push(videoData);
+        console.log('YouTube Popular This Year: Parsed video:', videoData.title, 'Views:', videoData.viewCount, 'Date:', videoData.uploadDate);
       }
     });
 
@@ -154,26 +158,36 @@ class YouTubePopularThisYear {
 
   parseVideoElement(element, index) {
     try {
-      // Extract video title and link
-      const titleElement = element.querySelector('#video-title, a#video-title');
-      if (!titleElement) return null;
+      // Extract video title and link - try multiple selectors
+      const titleElement = element.querySelector('#video-title, a#video-title, h3 a, ytd-video-meta-block a');
+      if (!titleElement) {
+        console.log('YouTube Popular This Year: No title element found for video', index);
+        return null;
+      }
 
       const title = titleElement.textContent.trim();
       const videoUrl = titleElement.href;
 
-      // Extract view count
-      const viewCountElement = element.querySelector('#metadata-line span:first-child, #metadata-line yt-formatted-string');
+      // Extract view count - try multiple selectors
+      const viewCountElement = element.querySelector('#metadata-line span:first-child, #metadata-line yt-formatted-string, ytd-video-meta-block span, .ytd-video-meta-block span');
       let viewCount = 0;
       if (viewCountElement) {
         viewCount = this.parseViewCount(viewCountElement.textContent);
       }
 
-      // Extract upload date
-      const dateElement = element.querySelector('#metadata-line span:last-child, #metadata-line yt-formatted-string:last-child');
+      // Extract upload date - try multiple selectors
+      const dateElement = element.querySelector('#metadata-line span:last-child, #metadata-line yt-formatted-string:last-child, ytd-video-meta-block span:last-child, .ytd-video-meta-block span:last-child');
       let uploadDate = null;
       if (dateElement) {
         uploadDate = this.parseUploadDate(dateElement.textContent);
       }
+
+      console.log('YouTube Popular This Year: Parsed video element:', {
+        title: title.substring(0, 50) + '...',
+        viewCount: viewCount,
+        uploadDate: uploadDate,
+        hasElement: !!element
+      });
 
       return {
         element: element,
@@ -184,7 +198,7 @@ class YouTubePopularThisYear {
         originalIndex: index
       };
     } catch (error) {
-      console.error('Error parsing video element:', error);
+      console.error('YouTube Popular This Year: Error parsing video element:', error);
       return null;
     }
   }
