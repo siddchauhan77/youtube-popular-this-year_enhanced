@@ -1,0 +1,46 @@
+/* Popular This Year Button Styles */
+.popular-this-year-btn {
+  background: transparent;
+  border: none;
+  color: #0f0f0f;
+  cursor: pointer;
+  font-family: "Roboto", "Arial", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 36px;
+  padding: 0 16px;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: 18px;
+  transition: background-color 0.1s;
+}
+
+.popular-this-year-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.popular-this-year-btn.active {
+  background-color: #0f0f0f;
+  color: #fff;
+}
+
+.popular-this-year-btn:focus {
+  outline: 2px solid #065fd4;
+  outline-offset: 2px;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .popular-this-year-btn {
+    color: #f1f1f1;
+  }
+  
+  .popular-this-year-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .popular-this-year-btn.active {
+    background-color: #f1f1f1;
+    color: #0f0f0f;
+  }
+}

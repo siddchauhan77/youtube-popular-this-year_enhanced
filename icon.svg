@@ -1,0 +1,19 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="64" cy="64" r="60" fill="#ff0000" stroke="#fff" stroke-width="4"/>
+  
+  <!-- Play button triangle -->
+  <polygon points="45,35 45,93 85,64" fill="#fff"/>
+  
+  <!-- Calendar icon for "This Year" -->
+  <rect x="20" y="20" width="25" height="20" rx="2" fill="#fff"/>
+  <rect x="22" y="22" width="21" height="16" fill="#ff0000"/>
+  <line x1="25" y1="26" x2="25" y2="38" stroke="#fff" stroke-width="1"/>
+  <line x1="30" y1="26" x2="30" y2="38" stroke="#fff" stroke-width="1"/>
+  <line x1="35" y1="26" x2="35" y2="38" stroke="#fff" stroke-width="1"/>
+  <line x1="40" y1="26" x2="40" y2="38" stroke="#fff" stroke-width="1"/>
+  
+  <!-- Trending up arrow -->
+  <path d="M90 80 L100 70 L110 80" stroke="#fff" stroke-width="3" fill="none"/>
+  <path d="M95 75 L95 90" stroke="#fff" stroke-width="3"/>
+</svg>
