@@ -8,6 +8,7 @@ class YouTubePopularThisYear {
     this.filteredVideos = [];
     this.twelveMonthsAgo = new Date();
     this.twelveMonthsAgo.setMonth(this.twelveMonthsAgo.getMonth() - 12);
+    this.observer = null;
     
     this.init();
   }
@@ -20,6 +21,7 @@ class YouTubePopularThisYear {
     if (this.isChannelPage()) {
       console.log('YouTube Popular This Year: Channel page detected');
       this.waitForSortButtons();
+      this.setupMutationObserver();
     } else {
       console.log('YouTube Popular This Year: Not a channel page');
     }
@@ -62,6 +64,47 @@ class YouTubePopularThisYear {
         this.addPopularThisYearButton();
       }
     }, 2000);
+  }
+
+  setupMutationObserver() {
+    // Watch for changes to the page that might remove our button
+    this.observer = new MutationObserver((mutations) => {
+      let shouldReaddButton = false;
+      
+      mutations.forEach((mutation) => {
+        // Check if our button was removed
+        if (mutation.type === 'childList') {
+          mutation.removedNodes.forEach((node) => {
+            if (node.nodeType === Node.ELEMENT_NODE) {
+              if (node.classList && node.classList.contains('popular-this-year-btn')) {
+                console.log('YouTube Popular This Year: Button was removed, will re-add');
+                shouldReaddButton = true;
+              }
+              // Also check if the button is inside a removed node
+              if (node.querySelector && node.querySelector('.popular-this-year-btn')) {
+                console.log('YouTube Popular This Year: Button container was removed, will re-add');
+                shouldReaddButton = true;
+              }
+            }
+          });
+        }
+      });
+      
+      if (shouldReaddButton) {
+        // Wait a bit for YouTube to finish updating
+        setTimeout(() => {
+          this.addPopularThisYearButton();
+        }, 100);
+      }
+    });
+    
+    // Start observing the document body for changes
+    this.observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+    
+    console.log('YouTube Popular This Year: MutationObserver setup complete');
   }
 
   addPopularThisYearButton() {
@@ -144,6 +187,14 @@ class YouTubePopularThisYear {
     }
 
     this.isActive = false;
+  }
+
+  cleanup() {
+    if (this.observer) {
+      this.observer.disconnect();
+      this.observer = null;
+      console.log('YouTube Popular This Year: MutationObserver disconnected');
+    }
   }
 
   extractVideoData() {
