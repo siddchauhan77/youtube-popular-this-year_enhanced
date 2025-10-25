@@ -1,5 +1,7 @@
 # YouTube Popular This Year Extension
 
+V2: Go to V2 FOLDER
+
 A Chrome extension that adds a "Popular This Year" filter to YouTube channel pages, showing the most viewed videos from the past 12 months.
 
 ## ✨ Features
