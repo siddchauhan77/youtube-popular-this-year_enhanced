@@ -1,0 +1,54 @@
+/* Popular Filter Button Styles - Match YouTube's exact styling */
+.popular-filter-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #f1f1f1;
+  cursor: pointer;
+  font-family: "Roboto", "Arial", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 36px;
+  padding: 0 20px;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: 18px;
+  transition: background-color 0.1s ease;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  box-sizing: border-box;
+  margin-right: 8px;
+}
+
+.popular-filter-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.popular-filter-btn.active {
+  background-color: #f1f1f1;
+  color: #0f0f0f;
+}
+
+.popular-filter-btn:focus {
+  outline: 2px solid #065fd4;
+  outline-offset: 2px;
+}
+
+/* Light mode support */
+@media (prefers-color-scheme: light) {
+  .popular-filter-btn {
+    background: rgba(0, 0, 0, 0.05);
+    color: #0f0f0f;
+  }
+  
+  .popular-filter-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  .popular-filter-btn.active {
+    background-color: #0f0f0f;
+    color: #fff;
+  }
+}
