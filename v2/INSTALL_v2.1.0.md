@@ -10,7 +10,7 @@
 
 ## 📦 Installation Steps
 
-### **If You Already Have v2.0.0 Installed:**
+### **If You Already Have older version Installed:**
 
 #### **Option 1: Replace Files (Easiest)**
 1. Go to `chrome://extensions/`
@@ -74,7 +74,7 @@ YouTube Popular This Year: Filtered 28 videos from 45 total
 
 ## ✅ What Still Works
 
-Everything from v2.0.0 still works perfectly:
+Everything from v1.0.0 to v2.0.0 still works perfectly:
 
 - ✅ 4 time period buttons (Last 7 Days, Last 3 Months, Last 6 Months, Last Year)
 - ✅ Click any button to activate filter
